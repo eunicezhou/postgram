@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Playpen+Sans:wght@800&display=swap');
+
+*{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+}
+.eng_title{
+    font-family:'Playpen Sans', cursive;
+    font-size: 24px;
+}
+.bold{
+    font-weight: 600;
+}
+
+body{
+    background-image: url(../static/image/backgroundImg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center bottom;
+    margin: 0;
+}
+.wrapper{
+    width:500px;
+    margin:10px auto;
+    border-radius: 10px;
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255,255,255,0.5);
+    padding: 0;
+}
+.nav{
+    box-sizing: border-box;
+    padding:0 15px;
+    border-bottom: #e8e8e8 solid 1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.container{
+    height:773px;
+    overflow-y: auto;
+}
+.messageRecord{
+    background-color: #fff;
+}
+.usernav{
+    box-sizing: border-box;
+    margin: 0;
+    border-top: #e8e8e8 solid 1px;
+    border-bottom: #777777 solid 1px;
+    display: flex;
+    align-items: center;
+}
+.userphoto{
+    width:70px;
+}
+.usercontain{
+    margin: 0;
+}
+.messageImg{
+    height:375px;
+    width:100%;
+    margin:0 auto;
+    background-size: 100%;
+    object-fit: cover;
+}
+.message{
+    font-size: 16px;
+    box-sizing: border-box;
+    padding:10px;
+    margin-bottom: 10px;
+}
+.text{
+    margin-left: 10px;
+}
+.file,.signupfile,.signinfile{
+    position:fixed;
+    top:calc(50% - 230px);
+    left:calc(50% - 224px);
+    z-index:3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing:border-box ;
+    padding: 10px;
+    display: none;
+    width:450px;
+}
+.signupfile,.signinfile{
+    background-color:#e8e8e8;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.fileUpload {
+    font-size: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+    background-color: #e8e8e8;
+    color: #333;
+    cursor: pointer;
+}
+#fileInput{
+    margin-top: 10px;
+    border-radius: 5px;
+    border: none;
+    text-decoration: underline;
+    background-color: #e8e8e8;
+    color:#777777;
+    font-size: 16px;
+}
+.btn{
+    padding: 5px;
+    color:#e8e8e8;
+    background-color: #3e3d3d;
+    box-shadow: #000000 2px;
+    width: 200px;
+    margin-top: 10px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+.footer{
+    border-top: #e8e8e8 solid 1px;
+    background-color: #e8e8e8;
+    position:sticky;
+    bottom:0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 0 10px 10px;
+}
+#add{
+    width: 50px;
+    cursor: pointer;
+}

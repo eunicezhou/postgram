@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MessageBoard</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="file">
+        <div class="fileUpload" onclick="document.getElementById('fileImg').click();">+</div>
+        <input type="file" id="fileImg" accept="image/*" style="display:none;">
+        <img id="previewImg" src="#" alt="Image Preview" style="display:none; max-width: 300px;">
+        <textarea id="fileInput" rows="4" cols="48"></textarea>
+        <div class="btn bold" id="share">分享動態</div>
+    </div>
+    <div class="signupfile">
+        請輸入帳號姓名:<input type="text" id="account--signup" ><br>
+        請輸入註冊信箱:<input type="email" id="email--signup"><br>
+        請輸入註冊密碼:<input type="password" id="password--signup">
+        <div id="signupAlert"></div>
+        <div class="btn bold" id="signup">註冊帳號</div>
+    </div>
+    <div class="signinfile">
+        請輸入信箱:<input type="email" id="email--signin" ><br>
+        請輸入密碼:<input type="password" id="password--signin">
+        <div id="signinAlert"></div>
+        <div class="btn bold" id="signin">登入系統</div>
+    </div>
+    <div class="wrapper">
+        <div class="nav">
+            <h2 class="eng_title" id="postgram">PostGram</h2>
+            <div id="welcome">
+                <span id="signupBTN">註冊/</span>
+                <span id="signinBTN">登入</span>
+                <span id="signoutBTN" style="display: none;">登出</span>
+            </div>
+        </div>
+        <div class="container">
+        </div>
+        <div class="footer">
+            <img src="../static/image/plus.png" id="add">
+        </div>
+    </div>
+    <script src="../static/tool.js"></script>
+    <script src="../static/script.js"></script>
+</body>
+</html>
