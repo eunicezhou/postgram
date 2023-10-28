@@ -2,6 +2,7 @@ import mysql.connector
 from mysql.connector import pooling
 from module_program.env_key import *
 
+
 con_password = os.getenv('DATABASE_PASSWORD')
 con ={
     'user':'admin',
@@ -12,7 +13,7 @@ con ={
 # 建立連接池
 connection_pool = pooling.MySQLConnectionPool(pool_name='postgram',pool_size=5,**con)
 
-def connect(execute_str,execute_argument=None):
+def databaseConnect(execute_str,execute_argument=None):
 	connection = connection_pool.get_connection()
 	cursor = connection.cursor()
 	try:

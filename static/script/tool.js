@@ -4,16 +4,10 @@ const fakeInput = document.querySelector(".fileUpload")
 const preview = document.getElementById('previewImg');
 const body = document.querySelector("body");
 const container = document.querySelector(".container");
-const share = document.querySelector("#share");
 const signup = document.querySelector("#signupBTN");
 const signupFile = document.querySelector(".signupfile");
-const accountSignup = document.querySelector("#account--signup").value;
-const emailSignup = document.querySelector("#email--signup").value;
-const passwordSignup = document.querySelector("#password--signup").value;
 const signin = document.querySelector("#signinBTN");
 const signinFile = document.querySelector(".signinfile");
-const emailSignin = document.querySelector("#email--signin").value;
-const passwordSignin = document.querySelector("#password--signin").value;
 const signout = document.querySelector("#signoutBTN");
 
 //建立頁面動態留言
@@ -54,3 +48,14 @@ function messageRecord(account,img_src,messageText){
 }
 messageRecord("zhou","../static/image/testPhoto.jpg","悠閒午後 輕鬆隨手畫");
 messageRecord("zhou","../static/image/testPhoto_2.jpg","你的幸運貓貓來了!!!");
+
+async function init(){
+    let records = await fetch("/api/record",
+        {method: "GET",headers: {"Content-Type": "application/json"}}
+    )
+    let recordJSON = await records.json();
+    for(let record in recordJSON){
+        messageRecord("zhou",recordJSON[record]['picture'],recordJSON[record]['text'])
+    }
+}
+init();
