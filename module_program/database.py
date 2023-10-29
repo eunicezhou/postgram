@@ -3,10 +3,9 @@ from mysql.connector import pooling
 from module_program.env_key import *
 
 
-con_password = os.getenv('DATABASE_PASSWORD')
 con ={
     'user':'admin',
-    'password':con_password,
+    'password':'postgrampassword',
     'host':'postgram.cragb4dlrndi.ap-northeast-1.rds.amazonaws.com',
     'database':'postgram',
 }

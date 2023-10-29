@@ -8,7 +8,7 @@ import json
 import uuid
 
 app=Flask(__name__)
-app.secret_key = app_key
+app.secret_key = 'your_secret_key'
 
 def results_convert(result):
 	response = Response(json.dumps(result,ensure_ascii = False), content_type = 'application/json; charset = utf-8')
@@ -131,4 +131,4 @@ def showRecords():
 def index():
     return render_template("index.html")
 
-app.run(debug=True, host="0.0.0.0", port=5000)
+app.run(debug=True, host="0.0.0.0", port=4000)
