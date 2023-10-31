@@ -104,7 +104,7 @@ def storeMessage():
         picture = request.files['photo']
         bucket_name = getBucketName()
         uploadToS3(picture,bucket_name,picture.filename)
-        s3_url = f"https://dx26yxwvur965.cloudfront.net/{picture.filename}"
+        s3_url = f"https://dx26yxwvur965.cloudfront.net/{messageID}+{picture.filename}"
         print(s3_url)
         databaseConnect("INSERT INTO message (message_id, photo, message) VALUE (%s, %s, %s)",\
                         (messageID, s3_url, message))
