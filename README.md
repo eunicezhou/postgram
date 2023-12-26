@@ -6,7 +6,6 @@ The following GIF demonstrates how to upload your picture and post a message on 
 
 ![postgram_1](https://github.com/eunicezhou/postgram/assets/131647842/0a395da6-0667-4b12-b50d-8e122abd61e8)
 
-
 ## Project Struct
 ![Alt text](image-1.png)
 ### Explanation about the user route
