@@ -1,5 +1,5 @@
 # postgram
-測試網址 : http://www.postgram.space:4000/
+website URL : https://postgram.space/
 ## About this project
 This is a message board where users can upload a photo and provide an explanation about the photo.
 The following GIF demonstrates how to upload your picture and post a message on this board.
