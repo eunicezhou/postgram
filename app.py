@@ -1,5 +1,4 @@
 from flask import *
-from flask_oauthlib.client import OAuth
 from datetime import datetime, timedelta
 from module_program.database import *
 from module_program.env_key import *
@@ -13,14 +12,10 @@ from google.auth.transport import requests
 
 app=Flask(__name__)
 app.secret_key = 'your_secret_key'
-GOOGLE_CLIENT_ID = '575527734855-07an02o2nqore7i6775mk6fnt4p0dhee'
-# app.secret_key = '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'
 
 def results_convert(result):
 	response = Response(json.dumps(result,ensure_ascii = False), content_type = 'application/json; charset = utf-8')
 	return response
-
-# oauth = OAuth(app)
 
 @app.route("/api/login", methods=['POST'])
 def login():
@@ -58,20 +53,19 @@ def storeMessage():
     try:
         messageID = str(uuid.uuid4())
         member = request.form['name']
-        picture = request.files['picture']
+        picture = request.form['picture']
         message = request.form['text']
         message_photo = request.files['photo']
         message_photo_file = f"{messageID}.jpeg"
         bucket_name = getBucketName()
         uploadToS3(message_photo,bucket_name,message_photo_file)
         s3_url = f"https://dx26yxwvur965.cloudfront.net/{message_photo_file}"
-        print(s3_url)
-        databaseConnect("INSERT INTO message (member_name, picture, message_id, photo, message) VALUE (%s, %s, %s)",\
+        databaseConnect("INSERT INTO message (member_name, picture, message_id, photo, message) VALUES (%s, %s, %s, %s, %s)",\
                         (member, picture, messageID, s3_url, message))
-        return "{'data':'success'}"
+        return jsonify({'data':'success'})
     except Exception as err:
         print(err)
-        return "{'error':True,'message':err}"
+        return jsonify({'error': True, 'message': str(err)})
     
 @app.route("/api/record",methods=['GET'])
 def showRecords():
@@ -81,7 +75,9 @@ def showRecords():
     for data in datas:
         result[f"data{count}"]= {
             'recordID': data[0],
-            'picture': data[1],
+            'member_name':data[3],
+            'picture': data[4],
+            'photo': data[1],
             'text': data[2]
         }
         count+=1

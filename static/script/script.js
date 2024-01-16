@@ -75,17 +75,22 @@ function signOut() {
     },500)
 }
 
-document.querySelector("#share").addEventListener('click',()=>{
+document.querySelector("#share").addEventListener('click',async()=>{
     const formData = new FormData();
-    let inputFile = addImg.files[0];
+    let inputFile = document.querySelector("#fileImg").files[0];
     const addText = document.querySelector("#fileInput");
-    console.log(addText.value);
     formData.append('name', memberInfo.name);
     formData.append('picture', memberInfo.picture);
     formData.append('photo', inputFile);
     formData.append('text', addText.value);
-
-    storeMessage(formData);
+    let store = await fetch("/api/message",
+        {method: "POST",
+        body: formData,
+        }
+    )
+    let result = await store.json();
+    console.log(result);
+    // storeMessage(formData);
 
     messageRecord(memberInfo.name, memberInfo.picture, document.getElementById('previewImg').src, addText.value);
     const shield = document.querySelector('#shield');

@@ -3,8 +3,8 @@ from module_program.env_key import *
 
 s3 = boto3.client(
     's3',
-    aws_access_key_id='AKIAWSBWBJWOP6NZYPX4',
-    aws_secret_access_key='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',
+    aws_access_key_id='AKIAWSBWBJWODEDPCZ5S',
+    aws_secret_access_key='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',
     region_name='ap-northeast-1')
 
 def getBucketName():

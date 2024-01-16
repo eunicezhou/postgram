@@ -27,8 +27,7 @@ document.querySelector("#add").addEventListener('click',()=>{
 })
 
 //獲取新留言放入的相片資訊
-const addImg = document.querySelector("#fileImg");
-addImg.addEventListener('change', async function() {
+document.querySelector("#fileImg").addEventListener('change', async function() {
     const file = this.files[0];
     let src = await loadFile(file);
     // let img = await loadImage(src); //將src轉為圖片
@@ -126,7 +125,8 @@ async function init(){
     )
     let recordJSON = await records.json();
     for(let record in recordJSON){
-        messageRecord("zhou","../static/image/user.png", recordJSON[record]['picture'],recordJSON[record]['text'])
+        console.log(recordJSON[record]);
+        messageRecord(recordJSON[record]['member_name'], recordJSON[record]['picture'], recordJSON[record]['photo'], recordJSON[record]['text']);
     }
 }
 
