@@ -11,7 +11,7 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 
 app=Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = app_key
 
 def results_convert(result):
 	response = Response(json.dumps(result,ensure_ascii = False), content_type = 'application/json; charset = utf-8')
@@ -21,7 +21,7 @@ def results_convert(result):
 def login():
     google_id_token = request.data.decode('utf-8') 
     try:
-        idinfo = id_token.verify_oauth2_token(google_id_token, requests.Request(), "575527734855-07an02o2nqore7i6775mk6fnt4p0dhee.apps.googleusercontent.com")
+        idinfo = id_token.verify_oauth2_token(google_id_token, requests.Request(), google_client_id)
         google_exp = idinfo['exp']
         exp_datetime = datetime.utcfromtimestamp(google_exp)
         userInfo = {
@@ -30,7 +30,7 @@ def login():
             'picture': idinfo['picture'],
             'exp': exp_datetime
         }
-        custom_token = jwt.encode(userInfo, 'your_secret_key', algorithm='HS256')
+        custom_token = jwt.encode(userInfo, token_key, algorithm='HS256')
         return jsonify({'custom_token': custom_token})
     except Exception as err:
         return jsonify({'error': f'{err}'})
@@ -42,7 +42,7 @@ def memberData():
         return jsonify({'error': 'Missing or invalid Authorization header'}), 401
     custom_token = header.split('Bearer ')[1]
     try:
-        decoded_payload = jwt.decode(custom_token, 'your_secret_key', algorithms=['HS256'])
+        decoded_payload = jwt.decode(custom_token, token_key, algorithms=['HS256'])
         print(decoded_payload)
         return jsonify(decoded_payload)
     except jwt.ExpiredSignatureError:

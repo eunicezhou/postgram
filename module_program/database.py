@@ -5,7 +5,7 @@ from module_program.env_key import *
 
 con ={
     'user':'admin',
-    'password':'postgrampassword',
+    'password':database_password,
     'host':'postgram.cragb4dlrndi.ap-northeast-1.rds.amazonaws.com',
     'database':'postgram',
 }

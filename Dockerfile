@@ -6,6 +6,7 @@ WORKDIR /app
 
 # 複製 package.json 與 package-lock.json 到容器中
 COPY module_require.txt .
+COPY .env .
 
 # 安裝應用程式相依套件
 RUN pip install -r module_require.txt
