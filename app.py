@@ -45,6 +45,10 @@ def memberData():
         decoded_payload = jwt.decode(custom_token, 'your_secret_key', algorithms=['HS256'])
         print(decoded_payload)
         return jsonify(decoded_payload)
+    except jwt.ExpiredSignatureError:
+        return jsonify({'error': 'Token has expired'}), 401
+    except jwt.InvalidTokenError as err:
+        return jsonify({'error': 'Invalid token'}), 401
     except Exception as err:
         return jsonify({'error': f'{err}'}), 500
 
@@ -64,7 +68,6 @@ def storeMessage():
                         (member, picture, messageID, s3_url, message))
         return jsonify({'data':'success'})
     except Exception as err:
-        print(err)
         return jsonify({'error': True, 'message': str(err)})
     
 @app.route("/api/record",methods=['GET'])

@@ -1,22 +1,27 @@
 let memberInfo;
-window.addEventListener('load', function (){
+window.addEventListener('load', async function (){
     init();
-    // 初始化和使用 google.accounts.id 的代碼
-    google.accounts.id.initialize({
-        client_id: '575527734855-07an02o2nqore7i6775mk6fnt4p0dhee',
-        callback: onGoogleSignIn
-    });
-    google.accounts.id.prompt();
-    google.accounts.id.renderButton(document.getElementById("signinDiv"), {
-        theme: 'outline',
-        size: 'medium',
-        text: 'signin'
-      });
+    if(localStorage.getItem('postgram')){
+        displayUserInfo(localStorage.getItem('postgram'));
+    }else{
+        // 初始化和使用 google.accounts.id 的代碼
+        google.accounts.id.initialize({
+            client_id: '575527734855-07an02o2nqore7i6775mk6fnt4p0dhee',
+            callback: onGoogleSignIn
+        });
+        google.accounts.id.prompt();
+        google.accounts.id.renderButton(document.getElementById("signinDiv"), {
+            theme: 'outline',
+            size: 'medium',
+            text: 'signin'
+        });
+    }
 })
 
 // Google 登入成功後的回調函數
 async function onGoogleSignIn(response) {
     const decodedToken = await decodeJwtResponse(response.credential);
+    localStorage.setItem('postgram', decodedToken);
     await displayUserInfo(decodedToken);
     document.getElementById('signinDiv').style.display = 'none';
 }
@@ -43,6 +48,9 @@ async function displayUserInfo(token) {
     }
     let userData = await fetch('/api/login', method);
     let userDataJson = await userData.json();
+    if(userDataJson['error']){
+        signOut();
+    }
     console.log('name',userDataJson.name);
     console.log('email',userDataJson.email);
     console.log('picture',userDataJson.picture);
@@ -70,8 +78,9 @@ async function displayUserInfo(token) {
 }
 
 function signOut() {
+    localStorage.removeItem('postgram');
     setTimeout(()=>{
-        location.reload()
+        location.reload();
     },500)
 }
 
